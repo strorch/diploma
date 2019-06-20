@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% load static %}
+
+{#<div class="row">#}
+{#    <form id="form" action="imageInfo" method="get">#}
+{#        #}
+{#    </form>#}
+{#</div>#}
+
+<div class="col s12 center">
+{% block images %}
+    {% for i in names %}
+        <div class="col center">
+            <div class="row s12" style="margin-bottom: 0 !important;">
+                <img src="{% static i %}" alt="No loaded image"/>
+            </div>
+            <div class="row s12">
+                {{ i }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+</div>

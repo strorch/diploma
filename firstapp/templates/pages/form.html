@@ -1,0 +1,27 @@
+
+<div class="row">
+    {% for i in files %}
+        <div class="col s2 offset-s1">
+            <a href="imageInfo?folder={{ i }}">{{ i }}</a>
+        </div>
+    {% endfor %}
+</div>
+
+{#<form id="form" action="imageInfo" method="get">#}
+{#    <div class="row s6 center">#}
+{#        <select id="folder">#}
+{#            {% for i in files %}#}
+{#                <option value="{{ i }}">{{ i }}</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#    </div>#}
+{#    <div class="row s6 center">#}
+{#        <select id="method">#}
+{#            <option value="shi-tomasi">Ші-Томасі</option>#}
+{#            <option value="harris">Харріса</option>#}
+{#        </select>#}
+{#    </div>#}
+{#    <div class="row s6 center">#}
+{#        <button id="submit_button" class="btn">OK</button>#}
+{#    </div>#}
+{#</form>#}
