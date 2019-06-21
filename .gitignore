@@ -1,4 +1,6 @@
-./db.sqlite3
-./env
-./.idea
-./shi-harris
+db.sqlite3
+result_Images/
+.idea/
+shi-harris/
+__pycache__/
+env/
