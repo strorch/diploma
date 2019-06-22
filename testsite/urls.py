@@ -19,5 +19,6 @@ import firstapp.views as firstapp_views
 
 urlpatterns = [
     path('', firstapp_views.index, name='home'),
-    path('imageInfo', firstapp_views.imageInfo, name='imageInfo')
+    path('imageInfo', firstapp_views.imageInfo, name='imageInfo'),
+    path('folderInfo', firstapp_views.folderInfo, name='folderInfo'),
 ]

@@ -1,18 +1,19 @@
-class App
-{
-    constructor()
-    {
-        this.filmManipulation = new FilmManipulation();
-    }
+$(document).ready(function(){
+    $('select').formSelect();
 
-    init_read_text()
-    {
-        let find_butt = document.getElementById('file_input');
-        find_butt.onchange = this.filmManipulation.sendFile;
-    }
-
-    init()
-    {
-        this.init_read_text();
-    }
-}
+    // $('input[type=file]').change(function (ev) {
+    //     var file = ev.target.files;
+    //     var data = new FormData();
+    //     data.append('files', file[0]);
+    //     // console.log(file);
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/load_file",
+    //         data: data,
+    //         success: function () {
+    //             $('#message').html("<h2>Contact Form Submitted!</h2>")
+    //         }
+    //     });
+    //     console.log(this.files[0].mozFullPath, data);
+    // });
+});

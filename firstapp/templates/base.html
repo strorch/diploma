@@ -5,37 +5,22 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
               integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
               crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <script src="{% static "static/js/FileManipulation.js" %}?{{ time }}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "static/css/style.css" %}">
     <script src="{% static "static/js/app.js" %}?{{ time }}"></script>
-
-    <meta charset="UTF-8">
     <title>Diplom</title>
-    <script>
-        $(document).ready(function(){
-            $('select').formSelect();
-
-            $('#submit_button').on('click', function () {
-                var folder = $('#folder option:selected').val();
-                var method = $('#method option:selected').val();
-
-            })
-        });
-    </script>
 </head>
 <body style="background-color: #f6f6f6">
-    <div class="container" style="background-color: white">
+    <div id="main" style="background-color: white; margin-left: 2vw; margin-right: 2vw;">
         <div class="col s12" style="margin-top: 2vw; padding-bottom: 2vw">
-{#            {{ kek }}#}
-            <div class="row center" style="padding-top: 1vw">
-                <h4>Виберіть папку з зображеннями:</h4>
-            </div>
-            {% include 'pages/form.html' %}
-
-            {% if request.path == '/imageInfo' %}
+            {{ kek }}
+            <br>
+            {% if request.path == '/' %}
+                {% include 'pages/form.html' %}
+            {% elif request.path == '/imageInfo' %}
+                {% include 'pages/ImageView.html' %}
+            {% elif request.path == '/folderInfo' %}
                 {% include 'pages/ImageView.html' %}
             {% elif request.path == '/error' %}
                 {% include 'pages/404.html' %}

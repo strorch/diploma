@@ -1,27 +1,51 @@
 
 <div class="row">
-    {% for i in files %}
-        <div class="col s2 offset-s1">
-            <a href="imageInfo?folder={{ i }}">{{ i }}</a>
+    <div class="col s6">
+        <div class="row">
+            <form id="formFolder" action="folderInfo" method="get">
+                <div class="row center" style="padding-top: 1vw">
+                    <p>Виберіть папку з зображеннями:</p>
+                </div>
+                <div class="col s6 offset-s3">
+                    <div class="row s6 center">
+                        <select name="folder">
+                            {% for i in files %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row s6 center">
+                        <select name="method">
+                            <option value="shi-tomasi">Ші-Томасі</option>
+                            <option value="harris">Харріса</option>
+                        </select>
+                    </div>
+                    <div class="row s6 center">
+                        <button type="submit" class="btn">OK</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    {% endfor %}
+    </div>
+    <div class="vertical-line">&nbsp;</div>
+    <div class="col s6">
+        <div class="row">
+            {% block content %}
+            <form id="formImage" action="imageInfo" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col s6 offset-s3">
+                    <div class="row center" style="padding-top: 1vw">
+                        <p>Або зображення для спотворення:</p>
+                    </div>
+                    <div class="row s6 center">
+                        <input type="file" name="document"/>
+                    </div>
+                    <div class="row s6 center">
+                        <button type="submit" class="btn">OK</button>
+                    </div>
+                </div>
+            </form>
+            {% endblock %}
+        </div>
+    </div>
 </div>
-
-{#<form id="form" action="imageInfo" method="get">#}
-{#    <div class="row s6 center">#}
-{#        <select id="folder">#}
-{#            {% for i in files %}#}
-{#                <option value="{{ i }}">{{ i }}</option>#}
-{#            {% endfor %}#}
-{#        </select>#}
-{#    </div>#}
-{#    <div class="row s6 center">#}
-{#        <select id="method">#}
-{#            <option value="shi-tomasi">Ші-Томасі</option>#}
-{#            <option value="harris">Харріса</option>#}
-{#        </select>#}
-{#    </div>#}
-{#    <div class="row s6 center">#}
-{#        <button id="submit_button" class="btn">OK</button>#}
-{#    </div>#}
-{#</form>#}

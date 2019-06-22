@@ -1,5 +1,7 @@
 import os
-from .ImageWorker import ImageWorker
+
+from .Methods import Methods
+from .ImageWorker import Image
 
 
 class FileWorker:
@@ -39,21 +41,22 @@ class FileWorker:
             print(e)
 
     @staticmethod
-    def mainWork(folderName):
+    def mainWork(folderName, methodName):
         true_files = FileWorker.getDirFiles(folderName)
         staticdir = FileWorker.getStaticPath(folderName)
+        method = Methods.getMethod(methodName)
+        if method == None:
+            raise Exception('No such method')
         FileWorker.CreateDir(staticdir)
 
         array = []
         for i in range(len(true_files)):
             nature_file_path = FileWorker.getNatureFilePath(folderName, true_files[i])
-
-            worker = ImageWorker(nature_file_path)
-
-            harris = worker.Harris()
-
+            img = Image(nature_file_path)
+            img.Load()
+            harris = method(img)
             static_file_path = "%s/%s" % (staticdir, true_files[i])
-            ImageWorker.SaveImg(static_file_path, harris)
-
+            harris.Save(static_file_path)
             array.append(static_file_path)
+
         return list(array)
