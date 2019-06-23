@@ -1,9 +1,8 @@
-
 <div class="row">
     <div class="col s6">
         <div class="row">
             <form id="formFolder" action="folderInfo" method="get">
-                <div class="row center" style="padding-top: 1vw">
+                <div class="row center pd-toped">
                     <p>Виберіть папку з зображеннями:</p>
                 </div>
                 <div class="col s6 offset-s3">
@@ -34,12 +33,20 @@
             <form id="formImage" action="imageInfo" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="col s6 offset-s3">
-                    <div class="row center" style="padding-top: 1vw">
+                    <div class="row center pd-toped">
                         <p>Або зображення для спотворення:</p>
                     </div>
-                    <div class="row s6 center">
-                        <input type="file" name="document"/>
+
+                     <div class="row s6 file-field center">
+                        <div class="btn file-btn">
+                            <span>Виберіть файл:</span>
+                            <input type="file" name="document"/>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
                     </div>
+
                     <div class="row s6 center">
                         <button type="submit" class="btn">OK</button>
                     </div>

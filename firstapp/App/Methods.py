@@ -1,4 +1,3 @@
-
 from .AbstractMethod import AbstractMethod
 
 

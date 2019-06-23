@@ -1,7 +1,35 @@
+body {
+    background-color: #f6f6f6;
+}
+
+#main {
+    background-color: white;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.mn-col {
+    margin-top: 2vw;
+    padding-bottom: 2vw;
+}
+
 .vertical-line {
     position: absolute;
     border-left: 1px solid #00000017;
     left: 50%;
     right: 50%;
-    height: 325px;
+    height: 305px;
+}
+
+.pd-toped {
+    padding-top: 1vw;
+}
+
+.img-div {
+    margin-bottom: 0 !important;
+}
+
+#back-link {
+    padding-top: 1vw;
+    padding-left: 2vw;
 }

@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from copy import copy
 
+from copy import copy
 from .ImageTranformation import ImageTransformation
 
 
@@ -16,9 +16,7 @@ class AbstractMethod(object):
     @staticmethod
     def Harris(img_object):
         tmp = copy(img_object)
-        img = ImageTransformation.ResizeImg(tmp.image)
-        avarage = ImageTransformation.AvarageColor(img)
-        # img = Image.AffineTransorm(img)
+        img = tmp.image
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -30,16 +28,14 @@ class AbstractMethod(object):
         img[dst > 0.01 * dst.max()] = [0, 0, 255]
         img[dst > 0.05 * dst.max()] = [255, 0, 0]
         img[dst > 0.1 * dst.max()] = [255, 0, 255]
-        img = ImageTransformation.SetColorToBlack(img, avarage)
+        img = ImageTransformation.SetColorToBlack(img)
         tmp.image = img
         return tmp
 
     @staticmethod
     def ShiTomasi(img_object):
         tmp = copy(img_object)
-        img = ImageTransformation.ResizeImg(tmp.image)
-        avarage = ImageTransformation.AvarageColor(img)
-        # img = Image.AffineTransorm(img)
+        img = tmp.image
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -49,7 +45,24 @@ class AbstractMethod(object):
         for i in range(len(corners_blue)):
             x, y = corners_blue[i].ravel()
             cv2.circle(img, (x, y), 3, 255, -1)
-        img = ImageTransformation.SetColorToBlack(img, avarage)
+        img = ImageTransformation.SetColorToBlack(img)
+        tmp.image = img
+        return tmp
+
+    @staticmethod
+    def ShiTomasi(img_object):
+        tmp = copy(img_object)
+        img = tmp.image
+
+        gray = cv2.FastFeatureDetector_create('')
+
+        corners_blue = cv2.goodFeaturesToTrack(gray, 25, 0.01, 10)
+        corners_blue = np.int0(corners_blue)
+
+        for i in range(len(corners_blue)):
+            x, y = corners_blue[i].ravel()
+            cv2.circle(img, (x, y), 3, 255, -1)
+        img = ImageTransformation.SetColorToBlack(img)
         tmp.image = img
         return tmp
 

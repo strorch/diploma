@@ -1,7 +1,9 @@
 import os
+import shutil
 
 from .Methods import Methods
 from .ImageWorker import Image
+from .ImageTranformation import ImageTransformation
 
 
 class FileWorker:
@@ -41,6 +43,14 @@ class FileWorker:
             print(e)
 
     @staticmethod
+    def RemoveDir(name):
+        try:
+            shutil.rmtree(name)
+            print('Dir "%s" successfully removed' % name)
+        except FileExistsError as e:
+            print(e)
+
+    @staticmethod
     def mainWork(folderName, methodName):
         true_files = FileWorker.getDirFiles(folderName)
         staticdir = FileWorker.getStaticPath(folderName)
@@ -48,15 +58,15 @@ class FileWorker:
         if method == None:
             raise Exception('No such method')
         FileWorker.CreateDir(staticdir)
-
         array = []
         for i in range(len(true_files)):
             nature_file_path = FileWorker.getNatureFilePath(folderName, true_files[i])
             img = Image(nature_file_path)
             img.Load()
-            harris = method(img)
+            resized_img = ImageTransformation.Resize(img.image, 90)
+            img.image = resized_img
+            result = method(img)
             static_file_path = "%s/%s" % (staticdir, true_files[i])
-            harris.Save(static_file_path)
+            result.Save(static_file_path)
             array.append(static_file_path)
-
         return list(array)

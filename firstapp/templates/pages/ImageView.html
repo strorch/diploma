@@ -1,12 +1,14 @@
 {% load static %}
 
-<a href="/"><-Назад</a>
+<div id="back-link">
+    <a href="/"><-Назад</a>
+</div>
 
 <div class="col s12 center">
 {% block images %}
     {% for i in names %}
         <div class="col center">
-            <div class="row s12" style="margin-bottom: 0 !important;">
+            <div class="row s12 img-div">
                 <img src="{% static i %}" alt="No loaded image"/>
             </div>
             <div class="row s12">
