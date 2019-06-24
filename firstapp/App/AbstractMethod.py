@@ -59,8 +59,11 @@ class AbstractMethod(object):
         (kps, descs) = akaze.detectAndCompute(gray, None)
         (kps1, descs1) = akaze.detectAndCompute(gray1, None)
 
+        if descs is None or descs1 is None:
+            return None
         bf = cv2.BFMatcher()
         matches = bf.knnMatch(descs,descs1, k=2)
+
         # Apply ratio test
         good = []
         for m,n in matches:

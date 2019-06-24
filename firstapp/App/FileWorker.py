@@ -72,6 +72,8 @@ class FileWorker:
                 resized_img = ImageTransformation.Resize(startImg.image, 90)
                 startImg.image = resized_img
                 result = method(img, startImg)
+                if result is None:
+                    continue
             else:
                 result = method(img)
 
