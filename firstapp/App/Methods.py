@@ -17,6 +17,9 @@ class Methods(AbstractMethod):
         return {
             'shi-tomasi': Methods.ShiTomasi,
             'harris': Methods.Harris,
+            'BRISK': Methods.BRISK,
+            'AKAZE': Methods.AKAZE,
+            'ORB': Methods.ORB,
         }
 
 

@@ -50,29 +50,67 @@ class AbstractMethod(object):
         return tmp
 
     @staticmethod
-    def ShiTomasi(img_object):
-        tmp = copy(img_object)
-        img = tmp.image
+    def BRISK(img_object, start_img_object): # surf orb
 
-        gray = cv2.FastFeatureDetector_create('')
+        gray1 = cv2.cvtColor(img_object.image, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(start_img_object.image, cv2.COLOR_BGR2GRAY)
 
-        corners_blue = cv2.goodFeaturesToTrack(gray, 25, 0.01, 10)
-        corners_blue = np.int0(corners_blue)
+        akaze = cv2.BRISK_create()
+        (kps, descs) = akaze.detectAndCompute(gray, None)
+        (kps1, descs1) = akaze.detectAndCompute(gray1, None)
 
-        for i in range(len(corners_blue)):
-            x, y = corners_blue[i].ravel()
-            cv2.circle(img, (x, y), 3, 255, -1)
-        img = ImageTransformation.SetColorToBlack(img)
-        tmp.image = img
-        return tmp
+        bf = cv2.BFMatcher()
+        matches = bf.knnMatch(descs,descs1, k=2)
+        # Apply ratio test
+        good = []
+        for m,n in matches:
+            if m.distance < 0.75 * n.distance:
+                good.append([m])
+        # cv2.drawMatchesKnn expects list of lists as matches.
+        img3 = cv2.drawMatchesKnn(gray,kps,gray1,kps1,good,None,flags=2)
+        img_object.image = img3
+        return img_object
 
-    # @staticmethod
-    # def OtherPoints(self):
-    #     minHessian = 400
-    #     detector = cv2.xfeatures2d_SURF.create(hessianThreshold=minHessian)
-    #     keypoints = detector.detect(src)
-    #
-    #     # -- Draw keypoints
-    #     img_keypoints = np.empty((src.shape[0], src.shape[1], 3), dtype=np.uint8)
-    #     cv.drawKeypoints(src, keypoints, img_keypoints)
-    #     return img_keypoints
+    @staticmethod
+    def AKAZE(img_object, start_img_object): # surf orb
+
+        gray1 = cv2.cvtColor(img_object.image, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(start_img_object.image, cv2.COLOR_BGR2GRAY)
+
+        akaze = cv2.AKAZE_create()
+        (kps, descs) = akaze.detectAndCompute(gray, None)
+        (kps1, descs1) = akaze.detectAndCompute(gray1, None)
+
+        bf = cv2.BFMatcher()
+        matches = bf.knnMatch(descs,descs1, k=2)
+        # Apply ratio test
+        good = []
+        for m,n in matches:
+            if m.distance < 0.75 * n.distance:
+                good.append([m])
+        # cv2.drawMatchesKnn expects list of lists as matches.
+        img3 = cv2.drawMatchesKnn(gray,kps,gray1,kps1,good,None,flags=2)
+        img_object.image = img3
+        return img_object
+
+    @staticmethod
+    def ORB(img_object, start_img_object): # surf orb
+
+        gray1 = cv2.cvtColor(img_object.image, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(start_img_object.image, cv2.COLOR_BGR2GRAY)
+
+        akaze = cv2.ORB_create()
+        (kps, descs) = akaze.detectAndCompute(gray, None)
+        (kps1, descs1) = akaze.detectAndCompute(gray1, None)
+
+        bf = cv2.BFMatcher()
+        matches = bf.knnMatch(descs,descs1, k=2)
+        # Apply ratio test
+        good = []
+        for m,n in matches:
+            if m.distance < 0.75 * n.distance:
+                good.append([m])
+        # cv2.drawMatchesKnn expects list of lists as matches.
+        img3 = cv2.drawMatchesKnn(gray,kps,gray1,kps1,good,None,flags=2)
+        img_object.image = img3
+        return img_object

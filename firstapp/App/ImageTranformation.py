@@ -51,8 +51,31 @@ class ImageTransformation:
         return cv2.warpAffine(img, M, (cols, rows))
 
     @staticmethod
-    def Gaussian(img):
+    def LightGaussian(img):
         a = np.arange(50, step=2).reshape((5, 5))
         gaussian_filter(a, sigma=1)
         result = gaussian_filter(img, sigma=5)
         return result
+
+    @staticmethod
+    def Gaussian(img):
+        a = np.arange(50, step=2).reshape((5, 5))
+        gaussian_filter(a, sigma=3)
+        result = gaussian_filter(img, sigma=10)
+        return result
+
+    @staticmethod
+    def Brightness(img):
+        alpha = 2    # Simple contrast control
+        beta = 50    # Simple brightness control
+
+        new_image = cv2.addWeighted(img, alpha, np.zeros(img.shape, img.dtype), 0, beta)
+        return new_image
+
+    @staticmethod
+    def LightBrightness(img):
+        alpha = 1.5    # Simple contrast control
+        beta = 30    # Simple brightness control
+
+        new_image = cv2.addWeighted(img, alpha, np.zeros(img.shape, img.dtype), 0, beta)
+        return new_image

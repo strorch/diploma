@@ -16,6 +16,9 @@ class FileUglier(object):
             'perspective': ImageTransformation.Perspective,
             'rotate': ImageTransformation.Rotate,
             'gaussian': ImageTransformation.Gaussian,
+            'light_gaussian': ImageTransformation.LightGaussian,
+            'brightness': ImageTransformation.Brightness,
+            'light_brightness': ImageTransformation.LightBrightness,
         }
 
     @staticmethod
@@ -31,6 +34,7 @@ class FileUglier(object):
         env_path = FileUglier.CreateFileEnv(splitted_name)
         img = Image(im_name[1:])
         img.Load()
+        img.Save(env_path+splitted_name)
         ugles = self.GetUgly()
         for func in ugles:
             tmp = copy(img)
