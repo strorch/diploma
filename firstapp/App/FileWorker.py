@@ -66,16 +66,13 @@ class FileWorker:
             resized_img = ImageTransformation.Resize(img.image, 90)
             img.image = resized_img
 
-            if methodName in ['BRISK', 'AKAZE', 'ORB']:
-                startImg = Image(FileWorker.startPath() + '/' + folderName+'/'+folderName)
-                startImg.Load()
-                resized_img = ImageTransformation.Resize(startImg.image, 90)
-                startImg.image = resized_img
-                result = method(img, startImg)
-                if result is None:
-                    continue
-            else:
-                result = method(img)
+            startImg = Image(FileWorker.startPath() + '/' + folderName+'/'+folderName)
+            startImg.Load()
+            resized_img = ImageTransformation.Resize(startImg.image, 90)
+            startImg.image = resized_img
+            result = method(img, startImg)
+            if result is None:
+                continue
 
             static_file_path = "%s/%s" % (staticdir, true_files[i])
             result.Save(static_file_path)
